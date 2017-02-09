@@ -16,9 +16,9 @@ public class BackgroundColorCallback implements TextImageCallback {
     private final TextImage textImage;
 
     public BackgroundColorCallback(Color backgroundColor, Color textColor, TextImage textImage) {
-        this.backgroundColor = Validate.noNull(backgroundColor, "The backgroundColor may not be null.");
-        this.textColor = Validate.noNull(textColor, "The textColor may not be null.");
-        this.textImage = Validate.noNull(textImage, "The textImage may not be null.");
+        this.backgroundColor = Validate.notNull(backgroundColor, "The backgroundColor may not be null.");
+        this.textColor = Validate.notNull(textColor, "The textColor may not be null.");
+        this.textImage = Validate.notNull(textImage, "The textImage may not be null.");
     }
 
     @Override

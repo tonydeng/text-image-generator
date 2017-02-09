@@ -6,7 +6,7 @@ package com.github.tonydeng.imagegenerator.validate;
 public class Validate {
 
 
-    public static <T> T noNull(final T param, final String message) {
+    public static <T> T notNull(final T param, final String message) {
         if(param == null)
             throw new IllegalArgumentException(message);
 
