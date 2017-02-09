@@ -19,6 +19,7 @@
         <env.encoding>UTF-8</env.encoding>
         <junit.version>4.12</junit.version>
         <logback.version>1.1.8</logback.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
     </properties>
     <dependencies>
         <dependency>
@@ -33,6 +34,11 @@
             <version>${logback.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.commons</groupId>-->
+            <!--<artifactId>commons-lang3</artifactId>-->
+            <!--<version>${commons-lang3.version}</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
