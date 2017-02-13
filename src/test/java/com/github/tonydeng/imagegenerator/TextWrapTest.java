@@ -1,19 +1,15 @@
 package com.github.tonydeng.imagegenerator;
 
-import com.github.tonydeng.imagegenerator.exporters.ImageType;
-import com.github.tonydeng.imagegenerator.exporters.ImageWriter;
-import com.github.tonydeng.imagegenerator.exporters.ImageWriterFactory;
 import com.github.tonydeng.imagegenerator.impl.TextImageImpl;
 import org.junit.Test;
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
 /**
  * Created by tonydeng on 2017/2/9.
  */
-public class TestTextWrap extends TestTextWrapper {
+public class TextWrapTest extends TextWrapperTest {
 
     @Test
     public void test() throws IOException {
@@ -23,11 +19,12 @@ public class TestTextWrap extends TestTextWrapper {
         image.setTextAligment(Alignment.LEFT);
         for (String s : text.split(System.getProperty("line.separator"))) {
             if (null != s && s.length() > 0) {
-                image.write(s);
+                log.info("'{}'",s);
+//                image.write(s);
             }
         }
 
-        ImageWriter writer = ImageWriterFactory.getImageWriter(ImageType.PNG);
-        writer.writeImageToFile(image, new File("textwrap.png"));
+//        ImageWriter writer = ImageWriterFactory.getImageWriter(ImageType.PNG);
+//        writer.writeImageToFile(image, new File("textwrap.png"));
     }
 }
