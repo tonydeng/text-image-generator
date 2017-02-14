@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class GreedyTextWrapplerTest extends TextWrapperTest {
     private GreedyTextWrapper wrapper = new GreedyTextWrapper();
-    private BufferedImage image = new BufferedImage(200, 400, BufferedImage.TYPE_INT_ARGB);
+    private BufferedImage image = new BufferedImage(100, 400, BufferedImage.TYPE_INT_ARGB);
     private FontMetrics fm = image.createGraphics().getFontMetrics();
 
     @Test
@@ -28,7 +28,7 @@ public class GreedyTextWrapplerTest extends TextWrapperTest {
 
     @Test
     public void testMaxText() {
-        final List<String> strings = wrapper.judgeText("监测动态心电图23小时31分钟。 平均心率90 bpm， 最慢心率47 bpm， 发生于07-09 14:21，", 50, fm);
+        final List<String> strings = wrapper.judgeText(wrapper.replaceText(text), image.getWidth(), fm);
         strings.forEach(s -> log.info("{}", s));
 //        log.info("{}", text);
 
