@@ -47,3 +47,7 @@ target/
 pom.xml.*
 */pom.xml.*
 release.properties
+
+#Project Temp Files#
+*.png
+*.jpg

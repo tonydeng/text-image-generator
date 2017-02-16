@@ -43,7 +43,7 @@ public class GreedyTextWrapper implements TextWrapper {
         String word = "";
         for (String line : lines) {
 
-            StringTokenizer tokenizer = new StringTokenizer(line);
+            StringTokenizer tokenizer = new StringTokenizer(line,SPACE);
 
             while (tokenizer.hasMoreTokens()) {
                 if (removed)

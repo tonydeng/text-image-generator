@@ -3,17 +3,13 @@ package com.github.tonydeng.imagegenerator.textalign;
 import com.github.tonydeng.imagegenerator.TextWrapperTest;
 import org.junit.Test;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.List;
 
 /**
  * Created by tonydeng on 2017/2/9.
  */
 public class GreedyTextWrapplerTest extends TextWrapperTest {
-    private GreedyTextWrapper wrapper = new GreedyTextWrapper();
-    private BufferedImage image = new BufferedImage(100, 400, BufferedImage.TYPE_INT_ARGB);
-    private FontMetrics fm = image.createGraphics().getFontMetrics();
+
 
     @Test
     public void testDoWrap() {
@@ -32,5 +28,15 @@ public class GreedyTextWrapplerTest extends TextWrapperTest {
         strings.forEach(s -> log.info("{}", s));
 //        log.info("{}", text);
 
+    }
+
+    @Test
+    public void testDoWrapByList(){
+        texts.forEach(
+                t->{
+                    List<String> strings = wrapper.doWrap(t,image.getWidth(),fm);
+                    strings.forEach(s -> log.info("{}", s));
+                }
+        );
     }
 }
