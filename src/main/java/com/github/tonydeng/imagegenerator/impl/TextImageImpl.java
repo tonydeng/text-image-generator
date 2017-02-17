@@ -64,6 +64,7 @@ public class TextImageImpl implements TextImage {
         graphics.setColor(new Color(0, 0, 0));
 
         graphics.clearRect(0, 0, width, height);
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // 反锯齿
     }
 
     public TextImageImpl(int width, int height, Margin margin) {
