@@ -13,6 +13,9 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.Locale;
 
+import static com.github.tonydeng.imagegenerator.exporters.ImageType.JPEG;
+import static com.github.tonydeng.imagegenerator.exporters.ImageType.PNG;
+
 /**
  * Implementation of the ImageWriter that handlers Jpeg export.
  * Uses the highest quality JPEG.
@@ -24,29 +27,36 @@ public class JpegImageWriter implements ImageWriter {
 
     /**
      * {@inheritDoc}
-     * @param image The image to write to the outputstream.
+     *
+     * @param image        The image to write to the outputstream.
      * @param outputStream The outputStream to write the image to.
      * @throws IOException
      */
     public void writeImageToOutputStream(final TextImage image, final OutputStream outputStream) throws IOException {
         Validate.notNull(image, "The image may not be null.");
         Validate.notNull(outputStream, "The outputStream may not be null.");
-
-        compressJpegStream(outputStream, image);
+        ImageIO.write(((TextImageImpl) image).getBufferedImage(), JPEG.getValue(), outputStream);
+//        compressJpegStream(outputStream, image);
     }
 
     /**
      * {@inheritDoc}
+     *
      * @param image The image to write to the file.
-     * @param file The outputStream to write the image to.
+     * @param file  The outputStream to write the image to.
      * @throws IOException
      */
     public void writeImageToFile(final TextImage image, final File file) throws IOException {
         Validate.notNull(image, "The image may not be null.");
         Validate.notNull(file, "The file may not be null.");
 
-        OutputStream outputStream = new FileOutputStream(file);
-        compressJpegStream(outputStream, image);
+        OutputStream os = new FileOutputStream(file);
+        try {
+            ImageIO.write(((TextImageImpl) image).getBufferedImage(), JPEG.getValue(), os);
+        } finally {
+            os.close();
+        }
+//        compressJpegStream(outputStream, image);
     }
 
     private void compressJpegStream(
@@ -74,7 +84,7 @@ public class JpegImageWriter implements ImageWriter {
                 this.compressionQuality = quality;
             }
         };
-        iwparam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT) ;
+        iwparam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
         iwparam.setCompressionQuality(MAX_COMPRESSION_QUALITY);
         return iwparam;
     }
@@ -87,7 +97,7 @@ public class JpegImageWriter implements ImageWriter {
         ImageOutputStream ios = ImageIO.createImageOutputStream(outputStream);
         try {
             jpegWriter.setOutput(ios);
-            jpegWriter.write(null, new IIOImage(((TextImageImpl)image).getBufferedImage(), null, null), imageWriteParam);
+            jpegWriter.write(null, new IIOImage(((TextImageImpl) image).getBufferedImage(), null, null), imageWriteParam);
         } finally {
             cleanUp(jpegWriter, ios);
         }

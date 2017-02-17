@@ -127,6 +127,6 @@ public class BaseTest {
 
     @Test
     public void test() throws IOException {
-        log.info("thie test......");
+        log.info("this test......");
     }
 }

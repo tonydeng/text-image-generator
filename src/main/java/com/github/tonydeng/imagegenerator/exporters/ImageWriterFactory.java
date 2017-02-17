@@ -17,8 +17,8 @@ public final class ImageWriterFactory {
      */
     public static ImageWriter getImageWriter(final ImageType type) {
         switch (type) {
-//            case JPEG:
-//                return JPEG_IMAGE_WRITER;
+            case JPEG:
+                return JPEG_IMAGE_WRITER;
             case PNG:
                 return PNG_IMAGE_WRITER;
             default:
