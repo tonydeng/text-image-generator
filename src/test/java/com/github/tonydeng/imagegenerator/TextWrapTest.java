@@ -14,7 +14,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by tonydeng on 2017/2/9.
@@ -57,41 +59,33 @@ public class TextWrapTest extends TextWrapperTest {
         }
     }
 
-//    @Test
+    @Test
     public void testImageWriterByFont() throws IOException, FontFormatException {
-//        String fontpath = "/Users/tonydeng/Downloads/qingchongti.ttf";
+        String text = texts.get(0);
+        log.info("{}", System.getProperty("user.dir"));
+        String fontpath = System.getProperty("user.dir") + "/src/main/resources/fonts/SimSun.ttf";
+
+
+        TextImage textImage = new TextImageImpl(1000, 300);
+
+        InputStream is = new FileInputStream(fontpath);
+        Font usedFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN,20);
+
+        textImage.setTextAligment(Alignment.LEFT);
+        textImage.withFont(usedFont);
+
+        textImage
+                .wrap(true)
+                .write(text);
+
+
+
+
 //        Font font = Font.createFont(Font.TRUETYPE_FONT, new File(fontpath));
 //        font.deriveFont(Font.PLAIN, 50);
-//
-//        BufferedImage image = new BufferedImage(1000, 800, BufferedImage.TYPE_INT_ARGB);
-//        Graphics2D graphics = image.createGraphics();
-//        graphics.setBackground(new Color(255, 255, 255));
-//        graphics.setColor(new Color(0, 0, 0));
-//        graphics.setFont(font);
-//        graphics.drawString("测试", 100, 100);
-//        graphics.dispose();
-//        graphics.drawImage(image,100,100,1000,800,null);
-//
-//        ImageIO.write(image, ImageType.PNG.getValue(), new File("t.png"));
 
 
-        // 获取font的样式应用在str上的整个矩形
-        String str = "测试";
-        Font font = new Font("SimSum", Font.PLAIN, 20);
-        Rectangle2D r = font.getStringBounds(str, new FontRenderContext(AffineTransform.getScaleInstance(1, 1), false, false));
-        int unitHeight = (int) Math.floor(r.getHeight()) + 1; // 获取单个字符的高度
-        // 获取整个str用了font样式的宽度这里用四舍五入后+1保证宽度绝对能容纳这个字符串作为图片的宽度
-        int width = (int) Math.round(r.getWidth()) + 1;
-        int height = unitHeight + 3; // 把单个字符的高度+3保证高度绝对能容纳字符串作为图片的高度
-        // 创建图片
-        BufferedImage imageb = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
-        Graphics2D g = imageb.createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // 反锯齿
-        g.setFont(font); // 设置画笔字体
-        g.drawString(str, 0, font.getSize()); // 画出字符串
-        g.dispose();
-
-        ImageIO.write(imageb, "png", new File("t.png")); // 输出png图片
+        ImageWriterFactory.getImageWriter(ImageType.PNG).writeImageToFile(textImage, new File("t.png"));
 
     }
 }
