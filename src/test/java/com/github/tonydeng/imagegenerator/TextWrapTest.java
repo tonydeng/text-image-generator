@@ -72,8 +72,8 @@ public class TextWrapTest extends TextWrapperTest {
         Font usedFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN,20);
 
         textImage.setTextAligment(Alignment.LEFT);
-        textImage.withFont(usedFont);
-
+//        textImage.withFont(usedFont);
+//        textImage.withFont(new Font("SimSun", Font.PLAIN, 20));
         textImage
                 .wrap(true)
                 .write(text);
