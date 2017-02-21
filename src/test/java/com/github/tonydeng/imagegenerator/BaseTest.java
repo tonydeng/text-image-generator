@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -125,8 +126,18 @@ public class BaseTest {
                     "　　当计算机出现后，人类开始真正有了一个可以模拟人类思维的工具，在以后的岁月中，无数科学家为这个目标努力着。现在人工智能已经不再是几个科学家的专利了，全世界几乎所有大学的计算机系都有人在研究这门学科，学习计算机的大学生也必须学习这样一门课程，在大家不懈的努力下，现在计算机似乎已经变得十分聪明了。例如，1997年5月，IBM公司研制的深蓝（Deep Blue）计算机战胜了国际象棋大师卡斯帕洛夫（Kasparov）。大家或许不会注意到，在一些地方计算机帮助人进行其它原来只属于人类的工"
     );
 
+    private Font previouslyUsedFont = new Font("SansSerif", Font.PLAIN, 12);
+
     @Test
     public void test() throws IOException {
         log.info("this test......");
+        Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+        for(Font font:fonts){
+//            log.info("{} equals {}",font,previouslyUsedFont.equals(font));
+            if(previouslyUsedFont.getFontName().equals(font.getFontName())){
+                log.info("{}",font);
+            }
+        }
+
     }
 }

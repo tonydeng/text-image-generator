@@ -88,4 +88,23 @@ public class TextWrapTest extends TextWrapperTest {
         ImageWriterFactory.getImageWriter(ImageType.PNG).writeImageToFile(textImage, new File("t.png"));
 
     }
+
+    @Test
+    public void testFullText() throws IOException {
+        String t = "测";
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<500;i++){
+            sb.append(t);
+        }
+
+        TextImage textImage = new TextImageImpl(1000,300);
+        textImage.setTextAligment(Alignment.LEFT).wrap(true);
+        log.info("1 {}",textImage.getCurrentFont());
+        textImage.setFontSize(12);
+        log.info("2 {}",textImage.getCurrentFont());
+
+
+//        ImageWriterFactory.getImageWriter(ImageType.PNG).writeImageToFile(textImage,new File("t.png"));
+
+    }
 }

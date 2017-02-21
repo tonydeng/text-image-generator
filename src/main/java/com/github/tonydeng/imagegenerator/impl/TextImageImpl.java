@@ -46,7 +46,7 @@ public class TextImageImpl implements TextImage {
 
     private final Graphics2D graphics;
 
-    private Font previouslyUsedFont = new Font("SansSerif", Font.PLAIN, 12);
+    private static Font previouslyUsedFont = new Font("SansSerif", Font.PLAIN, 12);
 
     private Color previouslyUsedColor = Color.BLACK;
 
@@ -298,6 +298,13 @@ public class TextImageImpl implements TextImage {
     @Override
     public TextImage setTextAligment(Alignment alignment) {
         this.alignment = Validate.notNull(alignment, "The alignment may not be null.");
+        return this;
+    }
+
+    @Override
+    public TextImage setFontSize(float size) {
+        Validate.notNull(size, "The font size may not be null.");
+        this.previouslyUsedFont = previouslyUsedFont.deriveFont(size);
         return this;
     }
 

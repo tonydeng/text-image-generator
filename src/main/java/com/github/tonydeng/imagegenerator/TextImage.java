@@ -190,4 +190,12 @@ public interface TextImage {
      * @return this
      */
     TextImage setTextAligment(Alignment alignment);
+
+    /**
+     * Sets the Font Size.
+     *
+     * @param size
+     * @return
+     */
+    TextImage setFontSize(float size);
 }
