@@ -11,10 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -72,16 +69,16 @@ public class TextImageImpl implements TextImage {
 
         graphics.clearRect(0, 0, width, height);
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // 反锯齿
-        FileInputStream fis = null;
+        InputStream is = null;
         try {
-            fis = new FileInputStream(System.getProperty("user.dir") + "/src/main/resources/fonts/SimSun.ttf");
-            this.withFont(Font.createFont(Font.TRUETYPE_FONT, fis).deriveFont(Font.PLAIN, 20));
+            is = this.getClass().getResourceAsStream("/fonts/SimSun.ttf");
+            this.withFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 20));
         } catch (Exception e) {
             log.error("init simsun ttf error:", e);
         } finally {
-            if (fis != null) {
+            if (is != null) {
                 try {
-                    fis.close();
+                    is.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

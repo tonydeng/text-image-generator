@@ -13,10 +13,7 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 /**
  * Created by tonydeng on 2017/2/9.
@@ -40,7 +37,7 @@ public class TextWrapTest extends TextWrapperTest {
 //        writer.writeImageToFile(image, new File("textwrap.png"));
     }
 
-        @Test
+    @Test
     public void testImageWriter() throws IOException {
 
         for (int i = 0; i < texts.size(); i++) {
@@ -69,7 +66,7 @@ public class TextWrapTest extends TextWrapperTest {
         TextImage textImage = new TextImageImpl(1000, 300);
 
         InputStream is = new FileInputStream(fontpath);
-        Font usedFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN,20);
+        Font usedFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(Font.PLAIN, 20);
 
         textImage.setTextAligment(Alignment.LEFT);
 //        textImage.withFont(usedFont);
@@ -77,8 +74,6 @@ public class TextWrapTest extends TextWrapperTest {
         textImage
                 .wrap(true)
                 .write(text);
-
-
 
 
 //        Font font = Font.createFont(Font.TRUETYPE_FONT, new File(fontpath));
@@ -93,18 +88,19 @@ public class TextWrapTest extends TextWrapperTest {
     public void testFullText() throws IOException {
         String t = "测";
         StringBuilder sb = new StringBuilder();
-        for(int i=0;i<500;i++){
+        for (int i = 0; i < 500; i++) {
             sb.append(t);
         }
 
-        TextImage textImage = new TextImageImpl(1000,300);
+        TextImage textImage = new TextImageImpl(1000, 300);
         textImage.setTextAligment(Alignment.LEFT).wrap(true);
-        log.info("1 {}",textImage.getCurrentFont());
+        textImage.write(sb.toString());
+        log.info("1 {}", textImage.getCurrentFont());
         textImage.setFontSize(12);
-        log.info("2 {}",textImage.getCurrentFont());
+        log.info("2 {}", textImage.getCurrentFont());
 
 
-//        ImageWriterFactory.getImageWriter(ImageType.PNG).writeImageToFile(textImage,new File("t.png"));
+        ImageWriterFactory.getImageWriter(ImageType.PNG).writeImageToFile(textImage, new File("t.png"));
 
     }
 }
