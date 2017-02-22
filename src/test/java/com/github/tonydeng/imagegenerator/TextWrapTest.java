@@ -100,7 +100,11 @@ public class TextWrapTest extends TextWrapperTest {
         log.info("2 {}", textImage.getCurrentFont());
 
 
-        ImageWriterFactory.getImageWriter(ImageType.PNG).writeImageToFile(textImage, new File("t.png"));
+        ImageWriterFactory.getImageWriter(ImageType.PNG).writeImageToFile(textImage, new File("f.png"));
+
+        FileOutputStream os = new FileOutputStream("os.png");
+        ImageWriterFactory.getImageWriter(ImageType.PNG).writeImageToOutputStream(textImage,os);
+        os.close();
 
     }
 }
